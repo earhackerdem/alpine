@@ -5,52 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
-
-    <style>
-      .hidden{
-        display: none;
-      }
-    </style>
-
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"
+      defer
+    ></script>
   </head>
   <body>
-
-    <div x-data="data()" x-init="start()">
-
-      <button :disabled="open"  @click="isOpen()">
-        Menu
-      </button>
-
-      <nav class="hidden" :class="{'hidden': !open}" @click.away="close()">
-
-        <ul>
-          <li>Item1</li>
-          <li>Item2</li>
-          <li>Item3</li>
-          <li>Item4</li>
-        </ul>
-
-      </nav>
-
+    <div x-data="{mensaje:null}">
+      <input type="text" x-model="mensaje"/>
+      <button @click="$refs.msj.innerText=mensaje">Enviar</button>
+      <p x-ref="msj"></p>
     </div>
-
-    <script>
-      function data() {
-        return {
-          open: null,
-          start(){
-              this.open = false;
-          },
-          isOpen() {
-            this.open = !this.open;
-          },
-          close() {
-            this.open = false;
-          },
-        };
-      }
-    </script>
-
   </body>
 </html>

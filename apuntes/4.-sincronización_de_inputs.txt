@@ -1,0 +1,29 @@
+Para sincronizar el valor de un input usando alpine se debe inicializar un componente con un objeto y propiedad
+Como se puede ver en input utiliza la directiva model y le asigna el nombre mensaje
+
+<input type="text" x-model="mensaje"/>
+
+mientras que en el input utiliza a la directiva x-text que tomara el valor de la propiedad mensaje del componente
+y lo asignara su contenido
+
+<p x-text="mensaje"></p>
+
+<div x-data="{mensaje:null}">
+      <input type="text" x-model="mensaje"/>
+      <p x-text="mensaje"></p>
+</div>
+
+Lo anterior asignara el valor del input en tiempo real en caso de requerir un comportamiento diferente puedes usar lo siguiente
+
+
+<div x-data="{mensaje:null}">
+      <input type="text" x-model="mensaje"/>
+      <button @click="$refs.msj.innerText=mensaje">Enviar</button>
+      <p x-ref="msj"></p>
+    </div>
+
+en este caso se añade un boton cuya instrucción es que al recibir un click aplicara el valor de la variable mensaje
+a la referencia msj usando innerText, mientra que al parrafo se le añade dicha referencia con  x-ref="msj"
+
+<button @click="$refs.msj.innerText=mensaje">Enviar</button>
+<p x-ref="msj"></p>
