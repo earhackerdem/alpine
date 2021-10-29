@@ -1,0 +1,20 @@
+Alpine utiliza componentes en los cuales se define el alcance de las variables que se definen dentro del mismo
+por ejemplo en el siguiente div se define x-data={open:false} que es un objeto donde su propiedad open es false
+Mientras que el boton utiliza la directa x-on:click.away="open=false", con lo cual toma la propiedad open del objeto
+y le asigna el valor de false, que es ejecutada al dar click fuera del limite de la etiqueta nav donde se define
+esto gracias a la directa  x-show="open" que define que x-show esta ligado al valor que tenga open
+
+<div x-data="{open:false}">
+  <button x-on:click="open = !open">Menu</button>
+  <nav x-show="open" x-on:click.away="open = false">
+    <ul>
+      <li>Item1</li>
+      <li>Item2</li>
+      <li>Item3</li>
+      <li>Item4</li>
+    </ul>
+  </nav>
+</div>
+
+
+
