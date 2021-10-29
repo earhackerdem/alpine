@@ -1,0 +1,36 @@
+Atributos dinamicos 
+
+
+Con la directiva x:bind se puede ligar las propiedades de un componente por ejemplo disabled
+
+<button x-bind:disabled="open"  x-on:click="isOpen()">
+        Menu
+/button>
+
+Es decir la propiedad disabled del button dependera del valor de la variable open, en este caso cuando open sea false
+la propiedad disabled estara presente y cuando sea false se quitara
+
+
+<nav class="hidden" x-bind:class="{'hidden': !open}" @click.away="close()">
+
+Por su parte la clase hidden sera sera removida  o removida dependiendo del valor contrario de open
+si open es true entonces se considera falso y la propiedad sera removida
+
+Ademas se puede reducir el código escrito por ejemplo de 
+
+<button x-bind:disabled="open"  x-on:click="isOpen()">
+
+a
+
+<button :disabled="open"  @click="isOpen()">
+
+y
+
+<nav class="hidden" x-bind:class="{'hidden': !open}" x-on:click.away="close()">
+
+a
+
+<nav class="hidden" :class="{'hidden': !open}" @click.away="close()">
+
+removiendo a x-bind y  a x-on
+
