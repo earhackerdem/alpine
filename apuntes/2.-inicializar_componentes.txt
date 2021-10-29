@@ -1,0 +1,38 @@
+Con la directiva  x-init podemos definir que una operación se realize despues de renderizado el componente 
+
+ <div x-data="data()" x-init="start()">
+      <button x-on:click="isOpen()">Menu</button>
+      <nav x-show="open" x-on:click.away="close()">
+        <ul>
+          <li>Item1</li>
+          <li>Item2</li>
+          <li>Item3</li>
+          <li>Item4</li>
+        </ul>
+      </nav>
+    </div>
+
+<script>
+      function data() {
+        return {
+          open: null,
+          start(){
+              this.open = false
+          },
+          isOpen() {
+            this.open = !this.open;
+          },
+          close() {
+            this.open = false;
+          },
+        };
+      }
+</script>
+
+En primer lugar se ha limpiado el código haciendo uso de un closure que devuelve a un objeto con la propiedad open
+y con las funciones start, isOpen y close, dicho closure es usado por las directiva x-data="data()"
+Como se puede apreciar en el closure se define la propiedad open como null y entonces con la directiva x-init="start()"
+se manda a llamar a la función start que lo que hace es cambiar el valor de la propiedad open por false ocultado el menu
+mientras que en las directivas se sustituye el código por llamadas a funciones del closure data() 
+x-on:click="isOpen()
+ x-on:click.away="close()
