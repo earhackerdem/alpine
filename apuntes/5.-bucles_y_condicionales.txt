@@ -1,0 +1,118 @@
+
+Para iterar valores con Alpine se puede utilizar la directiva for dentro de las etiquetas template,
+esto permite que se genere tantas veces sea necesario el contenido de la etiqueta template y en la 
+etiqueta span se utiliza a la directiva x-text para asignar el valor del producto iterado, esto considerando que
+el tipo de dato de products es un arreglo
+
+<div x-data="data()">
+    <ul>
+        <template x-for="product on products">
+            <li>
+                <span x-text="product"></span>
+            </li>
+        </template>
+
+    </ul>
+</div>
+
+<script>
+    function data(){
+        return {
+            products:[
+                'Pantalon','Camisa','Casca','Zapatilla'
+            ]
+        }
+    }
+</script>
+
+
+Por otra parte en caso de que el arreglo de productos contenga objetos se tiene que especificar que propiedad se busca recorrer
+por ejemplo
+
+<div x-data="data()">
+    <ul>
+        <template x-for="product on products">
+            <li>
+                <span x-text="product.name"></span>
+            </li>
+        </template>
+
+    </ul>
+</div>
+
+<script>
+    function data(){
+        return {
+            products:[
+                {
+                    id: 1,
+                    name: 'Pantalon',
+                    stock: 8
+                },
+                {
+                    id: 2,
+                    name:'Camisa',
+                    stock: 4
+                },
+                {
+                    id:1,
+                    name:'Casca',
+                    stock: 5
+                },
+                {
+                    id:1,
+                    name:'Zapatilla',
+                    stock: 6
+                }
+            ]
+        }
+    }
+</script>
+
+Mientras que si la información viene como un objeto y no como un array se debe especificar en el for que se trata de 
+valores de un objeto con Object.values(products), en este caso tambien se aprovecha del uso de la directiva if
+con la cual se evalua si el stock de un producto es 0 entonces renderiza el contenido de la etiqueta template
+
+<div x-data="data()">
+      <ul>
+        <template x-for="product in Object.values(products)">
+          <li>
+            <span x-text="product.stock"></span> -
+            <span x-text="product.name"></span>
+            <template x-if="product.stock === 0">
+              (Sin Stock)
+            </template>
+          </li>
+        </template>
+      </ul>
+    </div>
+
+
+    <script>
+      function data() {
+        return {
+          products: {
+            1: {
+              id: 1,
+              name: "Pantalon",
+              stock: 8,
+            },
+            2: {
+              id: 2,
+              name: "Camisa",
+              stock: 6,
+            },
+            3: {
+              id: 3,
+              name: "Casaca",
+              stock: 3,
+            },
+            4: {
+              id: 4,
+              name: "Zapatilla",
+              stock: 0,
+            },
+          },
+        };
+      }
+    </script>

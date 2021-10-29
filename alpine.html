@@ -11,10 +11,47 @@
     ></script>
   </head>
   <body>
-    <div x-data="{mensaje:null}">
-      <input type="text" x-model="mensaje"/>
-      <button @click="$refs.msj.innerText=mensaje">Enviar</button>
-      <p x-ref="msj"></p>
+    <div x-data="data()">
+      <ul>
+        <template x-for="product in Object.values(products)">
+          <li>
+            <span x-text="product.stock"></span> -
+            <span x-text="product.name"></span>
+            <template x-if="product.stock === 0">
+              (Sin Stock)
+            </template>
+          </li>
+        </template>
+      </ul>
     </div>
+
+    <script>
+      function data() {
+        return {
+          products: {
+            1: {
+              id: 1,
+              name: "Pantalon",
+              stock: 8,
+            },
+            2: {
+              id: 2,
+              name: "Camisa",
+              stock: 6,
+            },
+            3: {
+              id: 3,
+              name: "Casaca",
+              stock: 3,
+            },
+            4: {
+              id: 4,
+              name: "Zapatilla",
+              stock: 0,
+            },
+          },
+        };
+      }
+    </script>
   </body>
 </html>
